@@ -1,0 +1,6 @@
+
+ This content is written via an "async" | "writeFile" method . .
+
+ Here is the final result from the text files 
+ Hello, This is the First text file 
+ Hello, This is the Second text file 
