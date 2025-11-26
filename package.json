@@ -1,15 +1,18 @@
 {
-  "name": "express-my-version",
+  "name": "node-basics",
   "version": "1.0.0",
   "main": "1-first_node_app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sathish Raj",
   "license": "ISC",
-  "description": "",
+  "description": "Its a basic node app meant to help us learn all the node topics effectively",
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }

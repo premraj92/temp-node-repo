@@ -1,8 +1,3 @@
-// THIS FILE is PLACEHOLDER for the current/latest topic/functionality we are learning
-// ONCE we finish learning any individual/current topics we move that code to the --
-// Numbered/Indexed files here with the name of the topic
-// Then we clear this file & the latest/current topic code will be started here
-
 const http = require("http");
 let userCount = 0;
 const server = http.createServer((req, res) => {
