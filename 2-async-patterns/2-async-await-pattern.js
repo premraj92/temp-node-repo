@@ -1,8 +1,3 @@
-// THIS FILE is PLACEHOLDER for the current/latest topic/functionality we are learning
-// ONCE we finish learning any individual/current topics we move that code to the --
-// Numbered/Indexed files here with the name of the topic
-// Then we clear this file & the latest/current topic code will be started here
-
 // // APPROACH FOUR - using async await && INBUILT require("fs").promises
 // //   BUT NO INBUILT - utils => util.promisify(writeFile) required
 // // the simplest && most recommended Approach - VERY LITTLE BoilerPLATE
