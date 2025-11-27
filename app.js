@@ -5,43 +5,38 @@
 
 const http = require("http");
 const fs = require("fs");
-const path = require("path");
-
-const faviconPath = path.join(__dirname, "content", "favicon.ico");
-
-console.log(`faiconpath `, faviconPath);
-
-// const server = http.createServer((req, res) => {
-//   res.end(`Welcome to our app`)
-// })
-
-// Instead of the "http.createServer" above we will use the EventEmitter API
 
 const server = http.createServer();
 
-// server instance above will emit an request event, every time user requests something
-// we can subscribe to it & respond to the user
 server.on("request", (req, res) => {
-  if (req.url === "/") {
-    res.end(
-      `<h1 style="font-size: 32px; font-family: cursive">Welcome to our awesome app</h1>`
-    );
-    return;
-  }
+  // // If we read the bigFile synchronously & sent content of the whole file
+  // // we end up transmitting the whole file at one shot
+  // // which is not great for user experience
+  //   const textStream = fs.readFileSync('./content/bigFile.txt')
+  //   res.end(textStream)
 
-  if (req.url === "/favicon.ico") {
-    fs.readFile(faviconPath, (err, data) => {
-      if (err) {
-        res.writeHead(404);
-        res.end();
-        return;
-      }
+  // A better approach would be to use streams to transmit file data as multiple chunks
+  const fileStream = fs.createReadStream("./content/bigFile.txt", "utf8");
 
-      res.writeHead(200, { "Content-Type": "image/x-icon" });
-      res.end(data);
-    });
-    return;
-  }
+  fileStream.on("open", () => {
+    console.log(`Have received a new request`);
+
+    // fileStream instance here is of type ReadStream as you know
+    // And it transmits a continuous stream of data chunks
+    // these data chunks can be piped/channeled using the pipe operator below as
+    // a Writeable stream
+    // i.e. the pipe operator converts the ReadStream into a WritableStream
+    // and it then passess the WritableStream to the res
+    // Looks & behaves very similar to RxJS - conceptually & syntactically ??
+    // What are the similarities & differences
+    fileStream.pipe(res);
+  });
+
+  fileStream.on("error", (err) => {
+    res.end(err);
+  });
 });
 
-server.listen(5000);
+server.listen(5000, () => {
+  console.log(`Have started listening for requests on port 5000 . . .`);
+});
